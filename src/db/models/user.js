@@ -1,40 +1,32 @@
-
 export default (sequelize, DataTypes) => {
-    const User = sequelize.define('user',
+  const User = sequelize.define(
+    'user',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      nickName: {
+        type: DataTypes.STRING(15),
+        unique: true,
+        allowNull: false,
+      },
+      profileImage: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+    },
+    {
+      freezeTableName: true,
+      tableName: 'user',
+      indexes: [
         {
-            id: {
-                type: DataTypes.UUID,
-                primaryKey: true,
-                defaultValue: DataTypes.UUIDV4
-            },
-            serial: {
-                type: DataTypes.STRING(10),
-                unique: true,
-                allowNull: false
-            },
-            firstName: {
-                type: DataTypes.STRING(100),
-                allowNull: false
-            },
-            lastName: {
-                type: DataTypes.STRING(100),
-                allowNull: false
-            },
-            orgId: {
-                type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4
-            }
+          unique: false,
+          fields: ['nickName'],
         },
-        {
-            freezeTableName: true,
-            tableName: 'user',
-            indexes: [
-                {
-                    unique: false,
-                    fields: ['serial']
-                }
-            ]
-        }
-    );
-    return User;
+      ],
+    }
+  );
+  return User;
 };
