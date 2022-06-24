@@ -47,6 +47,7 @@ db.comment.belongsTo(db.post, {
   targetKey: 'id',
   onDelete: 'cascade',
 });
+db.comment.belongsTo(db.comment, { through: 'parentcomment', foreignKey: 'parentId', targetKey: 'id'});
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
