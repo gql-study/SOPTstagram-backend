@@ -1,5 +1,14 @@
 const User = require("../models/User")
 
+const getAllUsers = async () => {
+    try {
+        return await User.find()
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 const createUser = async (args) => {
     try {
         const user = new User({ ...args.input })
@@ -12,4 +21,4 @@ const createUser = async (args) => {
     }
 }
 
-module.exports = { createUser }
+module.exports = { createUser, getAllUsers }

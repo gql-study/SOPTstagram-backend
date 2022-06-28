@@ -1,5 +1,14 @@
 const Post = require("../models/Post")
 
+const getAllPost = async () => {
+    try {
+        return await Post.find()
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 const createPost = async (args) => {
     try {
         const images = ["", "", "", "", "", "", "", ""]
@@ -14,4 +23,4 @@ const createPost = async (args) => {
     }
 }
 
-module.exports = { createPost }
+module.exports = { createPost, getAllPost }

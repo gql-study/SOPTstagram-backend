@@ -16,6 +16,9 @@ const typeDefs = gql`
 `;
 
 const resolvers = {
+  Query: {
+    getAllUsers: async () => await userService.getAllUsers()
+  },
   Mutation: {
     createUser: async (_, args) => await userService.createUser(args)
   }

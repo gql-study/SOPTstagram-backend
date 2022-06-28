@@ -16,6 +16,9 @@ const typeDefs = gql`
 `
 
 const resolvers = {
+    Query: {
+        getAllPosts: async () => await postService.getAllPost(),
+    },
     Mutation: {
         createPost: async (_, args) => await postService.createPost(args)
     }
