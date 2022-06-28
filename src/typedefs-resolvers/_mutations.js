@@ -1,10 +1,12 @@
 const { gql } = require("apollo-server");
 
-const typeDefs = gql`
-  type Mutation {
-    createPost(input: CreatePostInput!): Post!
-    createUser(input: UserInput): User!
-  }
-`;
+// const typeDefs = gql`
+//   type Mutation {
+//     createPost(input: CreatePostInput!): Post!
+//     createUser(input: UserInput): User!
+//   }
+// `;
+
+let typeDefs;
 
 module.exports = typeDefs;

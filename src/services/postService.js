@@ -1,8 +1,9 @@
 const Post = require("../models/Post")
+const UserService = require("./userService")
 
 const getAllPost = async () => {
     try {
-        return await Post.find()
+        return await Post.find({})
     } catch (error) {
         console.log(error);
         throw error;
@@ -11,8 +12,14 @@ const getAllPost = async () => {
 
 const createPost = async (args) => {
     try {
-        const images = ["", "", "", "", "", "", "", ""]
-        const post = new Post({ ...args.input, user: {}, images })
+        const { content, images, userName } = args.post;
+        console.log("args.post: ", args.post);
+        const userObj = await UserService.getUserByName(userName);
+        const user = userObj._id;
+        console.log("userObj: ", userObj);
+        const post = new Post({ images, content, user })
+
+        console.log(">>>>>>>>>>>>>>>", post);
 
         await post.save()
 
