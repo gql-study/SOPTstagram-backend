@@ -1,6 +1,10 @@
 const { gql } = require("apollo-server");
 const { postService } = require("../services");
 const typeDefs = gql`
+    type Query {
+        getAllPosts: [Post]
+    }
+    
     type Post {
         _id: ID!
         content: String!
@@ -15,6 +19,23 @@ const typeDefs = gql`
     }
 `
 
+/*
+    getAllPosts: [Post]
+    ```
+    query {
+    getAllPosts {
+        _id,
+        content,
+        images,
+        user {
+            _id,
+            name,
+            intro,
+        }
+    }
+    ```
+}
+ */
 const resolvers = {
     Query: {
         getAllPosts: async () => await postService.getAllPost(),
