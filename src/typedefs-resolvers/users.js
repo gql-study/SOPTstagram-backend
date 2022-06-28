@@ -5,6 +5,10 @@ const typeDefs = gql`
   type Query {
     getAllUsers: [User]
   }
+  
+  type Mutation {
+    createUser(user: UserInput): User
+  }
 
   type User {
     _id: ID!
@@ -21,7 +25,6 @@ const typeDefs = gql`
   }
 
   input UserInput {
-    _id: ID!
     name: String!
     intro: String!
   }
@@ -40,7 +43,21 @@ const typeDefs = gql`
             content,
             images
         }
+  }
+  ```
+
+  createUser(user: UserInput): User
+  ```
+  mutation {
+    createUser(user: {
+        name: "jinhyung",
+        intro: "backend developer"
+    }){
+        _id,
+        name,
+        intro
     }
+  }
   ```
 }
  */

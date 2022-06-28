@@ -5,6 +5,10 @@ const typeDefs = gql`
         getAllPosts: [Post]
     }
     
+    type Mutation {
+        createPost(post: CreatePostInput): Post
+    }
+    
     type Post {
         _id: ID!
         content: String!
@@ -15,7 +19,7 @@ const typeDefs = gql`
     input CreatePostInput {
         content: String!
         images: [String!]
-        user: UserInput
+        userName: String!
     }
 `
 
@@ -23,14 +27,15 @@ const typeDefs = gql`
     getAllPosts: [Post]
     ```
     query {
-    getAllPosts {
-        _id,
-        content,
-        images,
-        user {
+        getAllPosts {
             _id,
-            name,
-            intro,
+            content,
+            images,
+            user {
+                _id,
+                name,
+                intro,
+            }
         }
     }
     ```
