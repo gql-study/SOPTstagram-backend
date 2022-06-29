@@ -24,7 +24,7 @@ const getComments = async (postId) => {
   try {
     const comments = await Comment.find({
       post: postId,
-      // parent: null,
+      parent: null,
     })
       .populate('post')
       .populate('writer')
