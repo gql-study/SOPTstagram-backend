@@ -1,11 +1,11 @@
-const { gql } = require("apollo-server");
-const { userService } = require("../services");
+const { gql } = require('apollo-server');
+const { userService } = require('../services');
 
 const typeDefs = gql`
   type Query {
     getAllUsers: [User]
   }
-  
+
   type Mutation {
     createUser(user: UserInput): User
   }
@@ -13,10 +13,10 @@ const typeDefs = gql`
   type User {
     _id: ID!
     name: String!
-    intro: String!
+    profile: String!
     post: [Post]
   }
-  
+
   type Post {
     _id: ID!
     content: String!
@@ -26,7 +26,7 @@ const typeDefs = gql`
 
   input UserInput {
     name: String!
-    intro: String!
+    profile: String!
   }
 `;
 
@@ -37,7 +37,7 @@ const typeDefs = gql`
     getAllUsers {
         _id,
         name,
-        intro,
+        profile,
         post {
             _id,
             content,
@@ -51,11 +51,11 @@ const typeDefs = gql`
   mutation {
     createUser(user: {
         name: "jinhyung",
-        intro: "backend developer"
+        profile: "backend developer"
     }){
         _id,
         name,
-        intro
+        profile
     }
   }
   ```
@@ -63,14 +63,14 @@ const typeDefs = gql`
  */
 const resolvers = {
   Query: {
-    getAllUsers: async () => await userService.getAllUsers()
+    getAllUsers: async () => await userService.getAllUsers(),
   },
   Mutation: {
-    createUser: async (_, args) => await userService.createUser(args)
-  }
-}
+    createUser: async (_, args) => await userService.createUser(args),
+  },
+};
 
 module.exports = {
   typeDefs: typeDefs,
-  resolvers
+  resolvers,
 };

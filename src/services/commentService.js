@@ -34,7 +34,7 @@ const getComments = async (postId) => {
         const result = {
           _id: comment._id,
           writer: comment.writer.name,
-          writerProfile: comment.writer.intro,
+          writerProfile: comment.writer.profile,
           content: comment.content,
           date: `${dayjs(new Date()).diff(comment.createdAt, 'hour')}`,
         };
@@ -62,7 +62,7 @@ const getChildComments = async (commentId) => {
         const result = {
           _id: comment._id,
           writer: comment.writer.name,
-          writerProfile: comment.writer.intro,
+          writerProfile: comment.writer.profile,
           content: comment.content,
           date: `${dayjs(new Date()).diff(comment.createdAt, 'hour')}`,
         };
