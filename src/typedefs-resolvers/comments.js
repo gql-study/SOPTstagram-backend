@@ -37,6 +37,8 @@ const resolvers = {
   },
   Mutation: {
     createComment: async (_, args) => await commentService.createComment(args),
+    deleteComment: async (_, args) =>
+      await commentService.deleteComment(args._id),
   },
 };
 

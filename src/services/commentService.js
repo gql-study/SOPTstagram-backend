@@ -77,4 +77,23 @@ const getChildComments = async (commentId) => {
   }
 };
 
-module.exports = { createComment, getComments, getChildComments };
+const deleteComment = async (commentId) => {
+  try {
+    const comment = await Comment.findByIdAndDelete(commentId);
+
+    if (!comment) {
+      return null;
+    }
+
+    return comment;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+module.exports = {
+  createComment,
+  getComments,
+  getChildComments,
+  deleteComment,
+};
