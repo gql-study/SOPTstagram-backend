@@ -32,6 +32,8 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     comments: async (_, args) => await commentService.getComments(args._id),
+    childComments: async (_, args) =>
+      await commentService.getChildComments(args._id),
   },
   Mutation: {
     createComment: async (_, args) => await commentService.createComment(args),

@@ -26,7 +26,6 @@ const getComments = async (postId) => {
       post: postId,
       parent: null,
     })
-      .populate('post')
       .populate('writer')
       .sort({ createdAt: -1 });
 
@@ -50,4 +49,32 @@ const getComments = async (postId) => {
   }
 };
 
-module.exports = { createComment, getComments };
+const getChildComments = async (commentId) => {
+  try {
+    const comments = await Comment.find({
+      parent: commentId,
+    })
+      .populate('writer')
+      .sort({ createdAt: -1 });
+
+    const data = await Promise.all(
+      comments.map((comment) => {
+        const result = {
+          _id: comment._id,
+          writer: comment.writer.name,
+          writerProfile: comment.writer.intro,
+          content: comment.content,
+          date: `${dayjs(new Date()).diff(comment.createdAt, 'hour')}`,
+        };
+        return result;
+      })
+    );
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+module.exports = { createComment, getComments, getChildComments };
